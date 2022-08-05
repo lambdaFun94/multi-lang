@@ -51,14 +51,19 @@ export const config: TemplateConfig = {
     ],
     // Defines the scope of entities that qualify for this stream.
     filter: {
-      entityTypes: ["location"],
+      savedFilterIds: ["1214656222"]
     },
     // The entity language profiles that documents will be generated for.
     localization: {
-      locales: ["en"],
+      locales: ["en", "de_DE"],
       primary: false,
     },
   },
+  alternateLanguageFields: [
+    "name",
+    "address",
+    "description"
+  ]
 };
 
 /**
@@ -68,7 +73,8 @@ export const config: TemplateConfig = {
  * take on the form: featureName/entityId
  */
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return `location/${document.id.toString()}`;
+  const locale = document.locale === "de-DE" ? "de" : document.locale
+  return `${locale}/${document.slug}`
 };
 
 /**
@@ -127,6 +133,7 @@ const Location: Template<TemplateRenderProps> = ({
     address,
     openTime,
     hours,
+    description,
     mainPhone,
     geocodedCoordinate,
     services,
@@ -155,6 +162,9 @@ const Location: Template<TemplateRenderProps> = ({
               <div className="col-span-2 pt-5 space-y-10">
                 <div>
                   {hours && <Hours title={"Restaurant Hours"} hours={hours} />}
+                </div>
+                <div>
+                  {description}
                 </div>
                 {geocodedCoordinate && (
                   <StaticMap
