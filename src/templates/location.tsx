@@ -73,8 +73,7 @@ export const config: TemplateConfig = {
  * take on the form: featureName/entityId
  */
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  const locale = document.locale === "de-DE" ? "de" : document.locale
-  return `${locale}/${document.slug}`
+  return document.slug;
 };
 
 
@@ -85,8 +84,6 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
  * This can include the title, meta tags, script tags, etc.
  */
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
-  relativePrefixToRoot,
-  path,
   document,
 }): HeadConfig => {
   return {
