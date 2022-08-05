@@ -77,15 +77,6 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
   return `${locale}/${document.slug}`
 };
 
-/**
- * Defines a list of paths which will redirect to the path created by getPath.
- *
- * NOTE: This currently has no impact on the local dev path. Redirects will be setup on
- * a new deploy.
- */
-export const getRedirects: GetRedirects<TemplateProps> = ({ document }) => {
-  return [`index-old/${document.id.toString()}`];
-};
 
 /**
  * This allows the user to define a function which will take in their template
