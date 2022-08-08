@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "pages dev",
     "build": "vite build",
-    "b": "yext pages build & yext pages generate & yext pages generate-test-data",
+    "b": "yext pages build && yext pages generate && yext pages generate-test-data",
     "fmt": "prettier -w .",
     "lint": "eslint .",
     "clean": "rm -rf .artifact-output .yext/ dist/ localData sites-rendered-output",
@@ -28,7 +28,7 @@
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
     "@vitejs/plugin-react": "^2",
-    "@yext/pages": "1.0.0-beta.0",
+    "@yext/pages": "^1.0.0-beta.0",
     "autoprefixer": "^10.4.4",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.29.4",

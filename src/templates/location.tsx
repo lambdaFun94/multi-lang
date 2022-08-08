@@ -19,7 +19,6 @@ import "../index.css";
 import {
   Template,
   GetPath,
-  GetRedirects,
   TemplateConfig,
   TemplateProps,
   TemplateRenderProps,
@@ -28,14 +27,13 @@ import {
 } from "@yext/pages";
 import PageLayout from "../components/page-layout";
 
+
 /**
  * Required when Knowledge Graph data is used for a template.
  */
 export const config: TemplateConfig = {
   stream: {
     $id: "my-stream-id-1",
-    // Specifies the exact data that each generated document will contain. This data is passed in
-    // directly as props to the default exported function.
     fields: [
       "id",
       "uid",
@@ -49,21 +47,14 @@ export const config: TemplateConfig = {
       "geocodedCoordinate",
       "services",
     ],
-    // Defines the scope of entities that qualify for this stream.
     filter: {
-      savedFilterIds: ["1214656222"]
+      entityTypes: ["location"]
     },
-    // The entity language profiles that documents will be generated for.
     localization: {
-      locales: ["en", "de_DE"],
+      locales: ["en", "es"],
       primary: false,
     },
-  },
-  alternateLanguageFields: [
-    "name",
-    "address",
-    "description"
-  ]
+  }
 };
 
 /**
