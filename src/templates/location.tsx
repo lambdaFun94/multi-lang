@@ -51,10 +51,14 @@ export const config: TemplateConfig = {
       entityTypes: ["location"]
     },
     localization: {
+      // We are including "es" in the locales array to generate a Spanish page for every location
       locales: ["en", "es"],
       primary: false,
     },
-  }
+  },
+  alternateLanguageFields: [
+    "name"
+  ]
 };
 
 /**
@@ -64,7 +68,7 @@ export const config: TemplateConfig = {
  * take on the form: featureName/entityId
  */
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return document.slug;
+  return document.slug ? document.slug : `${document.slug}/${document.id}`;
 };
 
 
@@ -102,60 +106,28 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
  * them in the src/templates folder as this is specific for true template files).
  */
 const Location: Template<TemplateRenderProps> = ({
-  relativePrefixToRoot,
-  path,
   document,
 }) => {
   const {
-    _site,
     name,
-    address,
-    openTime,
-    hours,
-    description,
-    mainPhone,
-    geocodedCoordinate,
-    services,
+    alternateLanguageFields,
+    locale
   } = document;
 
   return (
     <>
-      <PageLayout _site={_site}>
-        <Banner name={name} address={address} openTime={openTime}>
-          <div className="bg-white h-40 w-1/5 flex items-center justify-center text-center flex-col space-y-4 rounded-lg">
-            <div className="text-black text-base">Visit Us Today!</div>
-            <Cta
-              buttonText="Get Directions"
-              url="http://google.com"
-              style="primary-cta"
-            />
-          </div>
-        </Banner>
-        <div className="centered-container">
-          <div className="section">
-            <div className="grid grid-cols-3 gap-x-10 gap-y-10">
-              <div className="bg-gray-100 p-5 space-y-12">
-                <Contact address={address} phone={mainPhone}></Contact>
-                {services && <List list={services}></List>}
-              </div>
-              <div className="col-span-2 pt-5 space-y-10">
-                <div>
-                  {hours && <Hours title={"Restaurant Hours"} hours={hours} />}
-                </div>
-                <div>
-                  {description}
-                </div>
-                {geocodedCoordinate && (
-                  <StaticMap
-                    latitude={geocodedCoordinate.latitude}
-                    longitude={geocodedCoordinate.longitude}
-                  ></StaticMap>
-                )}
-              </div>
-            </div>
-          </div>
+      {locale === "en" ?
+        <div>
+          Alternate Language Name: {alternateLanguageFields.es.name}
         </div>
-      </PageLayout>
+        :
+        <div>
+          Alternate Language Name: {alternateLanguageFields.en.name}
+        </div>
+      }
+      <div>
+        Primary Language Name: {name}
+      </div>
     </>
   );
 };

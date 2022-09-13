@@ -17,6 +17,10 @@ const renderPrettyAddress = (address: Address) => {
       <div>
         {address.city}, {address.region}
       </div>
+      <div>
+        {address.postalCode}
+      </div>
+
     </>
   );
 };
